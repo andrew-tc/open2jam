@@ -114,7 +114,7 @@ public class Render implements GameWindowCallback
     private NoteDistanceCalculator distance;
     
     private boolean gameStarted = true;
-    private boolean playerDead = false;
+    private boolean alive = true;
 
     /** the layer of the notes */
     private int note_layer;
@@ -385,6 +385,17 @@ public class Render implements GameWindowCallback
             @Override
             public String getText() {
                 return "Game Speed: " + String.format("%+d", pitchShift);
+            }
+
+            @Override
+            public boolean isVisible() { return true; }
+        });
+        
+        statusList.add(new StatusItem() {
+
+            @Override
+            public String getText() {
+                return "Player: " + (alive ? "Alive" : "Dead");
             }
 
             @Override
@@ -1099,7 +1110,9 @@ public class Render implements GameWindowCallback
         entities_matrix.add(judgment_entity);
 
         // add to the statistics
-        note_counter.get(result).incNumber();
+        if(alive){
+            note_counter.get(result).incNumber();
+        }
         
         // for cool: display the effect
         if (result == JudgmentResult.COOL || result == JudgmentResult.GOOD) {
@@ -1143,7 +1156,7 @@ public class Render implements GameWindowCallback
             case COOL:
                 jambar_entity.addNumber(2);
                 consecutive_cools++;
-                if(!playerDead){
+                if(alive){
                     lifebar_entity.addNumber(rank >= 2 ? 48 : 96);
                     score_value = 200 + (jamcombo_entity.getNumber()*10);
                 }
@@ -1151,7 +1164,7 @@ public class Render implements GameWindowCallback
             case GOOD:
                 jambar_entity.addNumber(1);
                 consecutive_cools = 0;
-                if(!playerDead){
+                if(alive){
                     score_value = 100;
                 }
                 break;
@@ -1166,7 +1179,7 @@ public class Render implements GameWindowCallback
                 {
                     jambar_entity.setNumber(0);
                     jamcombo_entity.resetNumber();
-                    if(!playerDead){
+                    if(alive){
                         lifebar_entity.subtractNumber(240);
                         score_value = 4;
                     }     
@@ -1177,7 +1190,7 @@ public class Render implements GameWindowCallback
                 jambar_entity.setNumber(0);
                 jamcombo_entity.resetNumber();
                 consecutive_cools = 0;
-                if(!playerDead){
+                if(alive){
                     lifebar_entity.subtractNumber(1440);
                     if(score_entity.getNumber() >= 10)
                         score_value = -10;
@@ -1187,6 +1200,10 @@ public class Render implements GameWindowCallback
                  break;
         }
         
+        if(lifebar_entity.getNumber() <= 0){
+            alive = false;
+        }
+                
         score_entity.addNumber(score_value);
 
         if(jambar_entity.getNumber() >= jambar_entity.getLimit())
@@ -1203,13 +1220,9 @@ public class Render implements GameWindowCallback
             pills_draw.add(ee);
         }
 
-        if(maxcombo_entity.getNumber()<(combo_entity.getNumber()))
+        if(alive && maxcombo_entity.getNumber() < combo_entity.getNumber())
         {
             maxcombo_entity.incNumber();
-        }
-        
-        if(lifebar_entity.getNumber() <= 0){
-            playerDead = true;
         }
         
         return result;
