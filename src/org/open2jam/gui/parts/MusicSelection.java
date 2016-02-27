@@ -246,6 +246,7 @@ public class MusicSelection extends javax.swing.JPanel
         jc_full_screen.setSelected(go.isDisplayFullscreen());
         jc_vsync.setSelected(go.isDisplayVsync());
         jc_timed_judgment.setSelected(go.getJudgmentType() == GameOptions.JudgmentType.TimeJudgment);
+        jc_infinite_health.setSelected(go.isInfiniteHealth());
         
     }
     
@@ -268,6 +269,7 @@ public class MusicSelection extends javax.swing.JPanel
         go.setDisplayFullscreen(jc_full_screen.isSelected());
         go.setDisplayVsync(jc_vsync.isSelected());
         go.setJudgmentType(jc_timed_judgment.isSelected() ? GameOptions.JudgmentType.TimeJudgment : GameOptions.JudgmentType.BeatJudgment);
+        go.setInfiniteHealth(jc_infinite_health.isSelected());
         
         go.setDisplay((DisplayMode)combo_displays.getSelectedItem());
         
@@ -332,6 +334,7 @@ public class MusicSelection extends javax.swing.JPanel
         combo_speedType = new javax.swing.JComboBox();
         btn_autoplay_keys = new javax.swing.JButton();
         jc_autosound = new javax.swing.JCheckBox();
+        jc_infinite_health = new javax.swing.JCheckBox();
         panel_info = new javax.swing.JPanel();
         lbl_level1 = new javax.swing.JLabel();
         lbl_bpm1 = new javax.swing.JLabel();
@@ -414,7 +417,7 @@ public class MusicSelection extends javax.swing.JPanel
 
         lbl_display.setText("Display:");
 
-        jc_custom_size.setFont(new java.awt.Font("Tahoma", 0, 10));
+        jc_custom_size.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jc_custom_size.setText("Custom size:");
         jc_custom_size.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -492,10 +495,9 @@ public class MusicSelection extends javax.swing.JPanel
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel_settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cb_autoSyncDisplay)
-                                    .addComponent(cb_autoSyncAudio))
-                                .addGap(4, 4, 4))))
+                                    .addComponent(cb_autoSyncAudio)))))
                     .addComponent(jLabel3))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         panel_settingLayout.setVerticalGroup(
             panel_settingLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,7 +568,7 @@ public class MusicSelection extends javax.swing.JPanel
                     .addComponent(btn_delete)
                     .addComponent(load_progress, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(table_scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                .addComponent(table_scroll, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -575,7 +577,7 @@ public class MusicSelection extends javax.swing.JPanel
                 .addComponent(panel_setting, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        panel_song.setName("");
+        panel_song.setName(""); // NOI18N
 
         panel_modifiers.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Modifiers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
         panel_modifiers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -664,6 +666,9 @@ public class MusicSelection extends javax.swing.JPanel
 
         jc_autosound.setText("AutoSound");
 
+        jc_infinite_health.setText("Infinite health");
+        jc_infinite_health.setToolTipText("");
+
         javax.swing.GroupLayout panel_modifiersLayout = new javax.swing.GroupLayout(panel_modifiers);
         panel_modifiers.setLayout(panel_modifiersLayout);
         panel_modifiersLayout.setHorizontalGroup(
@@ -686,7 +691,7 @@ public class MusicSelection extends javax.swing.JPanel
                             .addComponent(lbl_main_vol))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel_modifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(slider_key_vol, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                            .addComponent(slider_key_vol, javax.swing.GroupLayout.Alignment.TRAILING, 0, 218, Short.MAX_VALUE)
                             .addComponent(slider_bgm_vol, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
                             .addComponent(slider_main_vol, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGroup(panel_modifiersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,6 +711,8 @@ public class MusicSelection extends javax.swing.JPanel
                                 .addComponent(js_hispeed, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_modifiersLayout.createSequentialGroup()
                         .addComponent(jc_timed_judgment)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jc_infinite_health)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jc_autosound)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -749,7 +756,8 @@ public class MusicSelection extends javax.swing.JPanel
                     .addComponent(jc_timed_judgment)
                     .addComponent(btn_autoplay_keys)
                     .addComponent(jc_autoplay)
-                    .addComponent(jc_autosound)))
+                    .addComponent(jc_autosound)
+                    .addComponent(jc_infinite_health)))
         );
 
         panel_info.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Song Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
@@ -906,8 +914,8 @@ public class MusicSelection extends javax.swing.JPanel
                 .addComponent(panel_modifiers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bt_play.setFont(new java.awt.Font("Tahoma", 1, 24));
-        bt_play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/open2jam_icon.png")));
+        bt_play.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        bt_play.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/open2jam_icon.png"))); // NOI18N
         bt_play.setText("PLAY !!!");
         bt_play.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1064,6 +1072,7 @@ public class MusicSelection extends javax.swing.JPanel
             final boolean autosound = jc_autosound.isSelected();
 
             final boolean time_judgment = jc_timed_judgment.isSelected();
+            final boolean infinite_health = jc_infinite_health.isSelected();
 
             final SpeedType speed_type =(SpeedType) combo_speedType.getSelectedItem();
 
@@ -1097,6 +1106,7 @@ public class MusicSelection extends javax.swing.JPanel
             go.setDisplayFullscreen(fs);
             go.setDisplayVsync(vsync);
             go.setJudgmentType(jc_timed_judgment.isSelected() ? GameOptions.JudgmentType.TimeJudgment : GameOptions.JudgmentType.BeatJudgment);
+            go.setInfiniteHealth(infinite_health);
             
             System.out.println(go.isAutoplay());
             
@@ -1292,6 +1302,7 @@ public class MusicSelection extends javax.swing.JPanel
     private javax.swing.JCheckBox jc_autosound;
     private javax.swing.JCheckBox jc_custom_size;
     private javax.swing.JCheckBox jc_full_screen;
+    private javax.swing.JCheckBox jc_infinite_health;
     private javax.swing.JCheckBox jc_timed_judgment;
     private javax.swing.JCheckBox jc_vsync;
     private javax.swing.JRadioButton jr_rank_easy;

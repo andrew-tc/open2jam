@@ -1180,7 +1180,7 @@ public class Render implements GameWindowCallback
                     jambar_entity.setNumber(0);
                     jamcombo_entity.resetNumber();
                     if(alive){
-                        lifebar_entity.subtractNumber(240);
+                        lifebar_entity.subtractNumber(opt.isInfiniteHealth() ? 0 : 240);
                         score_value = 4;
                     }     
                 }
@@ -1191,7 +1191,7 @@ public class Render implements GameWindowCallback
                 jamcombo_entity.resetNumber();
                 consecutive_cools = 0;
                 if(alive){
-                    lifebar_entity.subtractNumber(1440);
+                    lifebar_entity.subtractNumber(opt.isInfiniteHealth() ? 0 : 1440);
                     if(score_entity.getNumber() >= 10)
                         score_value = -10;
                     else

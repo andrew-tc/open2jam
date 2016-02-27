@@ -480,7 +480,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="slider_key_vol" alignment="1" min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="slider_key_vol" alignment="1" min="0" pref="218" max="32767" attributes="0"/>
                                   <Component id="slider_bgm_vol" alignment="1" min="0" pref="0" max="32767" attributes="0"/>
                                   <Component id="slider_main_vol" alignment="0" pref="0" max="32767" attributes="1"/>
                               </Group>
@@ -505,6 +505,8 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jc_timed_judgment" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jc_infinite_health" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jc_autosound" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -561,6 +563,7 @@
                           <Component id="btn_autoplay_keys" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jc_autoplay" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jc_autosound" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jc_infinite_health" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -719,6 +722,12 @@
             <Component class="javax.swing.JCheckBox" name="jc_autosound">
               <Properties>
                 <Property name="text" type="java.lang.String" value="AutoSound"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jc_infinite_health">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Infinite health"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>
           </SubComponents>
