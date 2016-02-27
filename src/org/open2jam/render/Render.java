@@ -114,6 +114,7 @@ public class Render implements GameWindowCallback
     private NoteDistanceCalculator distance;
     
     private boolean gameStarted = true;
+    private boolean playerDead = false;
 
     /** the layer of the notes */
     private int note_layer;
@@ -1142,46 +1143,48 @@ public class Render implements GameWindowCallback
             case COOL:
                 jambar_entity.addNumber(2);
                 consecutive_cools++;
-                lifebar_entity.addNumber(rank >= 2 ? 48 : 96);
-                score_value = 200 + (jamcombo_entity.getNumber()*10);
+                if(!playerDead){
+                    lifebar_entity.addNumber(rank >= 2 ? 48 : 96);
+                    score_value = 200 + (jamcombo_entity.getNumber()*10);
+                }
                 break;
-
             case GOOD:
                 jambar_entity.addNumber(1);
                 consecutive_cools = 0;
-                score_value = 100;
+                if(!playerDead){
+                    score_value = 100;
+                }
                 break;
-
             case BAD:
                 if(pills_draw.size() > 0)
                 {
-                    result = JudgmentResult.GOOD;
-                    jambar_entity.addNumber(1);
                     pills_draw.removeLast().setDead(true);
-
-                    score_value = 100; // TODO: not sure
+                    result = JudgmentResult.GOOD;
+                    handleJudgment(result);
                 }
                 else
                 {
                     jambar_entity.setNumber(0);
                     jamcombo_entity.resetNumber();
-                    lifebar_entity.subtractNumber(240);
-
-                    score_value = 4;
+                    if(!playerDead){
+                        lifebar_entity.subtractNumber(240);
+                        score_value = 4;
+                    }     
                 }
                 consecutive_cools = 0;
-            break;
-
+                break;
             case MISS:
                 jambar_entity.setNumber(0);
                 jamcombo_entity.resetNumber();
                 consecutive_cools = 0;
-
-                lifebar_entity.subtractNumber(1440);
-
-                if(score_entity.getNumber() >= 10)score_value = -10;
-                else score_value = -score_entity.getNumber();
-            break;
+                if(!playerDead){
+                    lifebar_entity.subtractNumber(1440);
+                    if(score_entity.getNumber() >= 10)
+                        score_value = -10;
+                    else
+                        score_value = -score_entity.getNumber();
+                }
+                 break;
         }
         
         score_entity.addNumber(score_value);
@@ -1203,6 +1206,10 @@ public class Render implements GameWindowCallback
         if(maxcombo_entity.getNumber()<(combo_entity.getNumber()))
         {
             maxcombo_entity.incNumber();
+        }
+        
+        if(lifebar_entity.getNumber() <= 0){
+            playerDead = true;
         }
         
         return result;
