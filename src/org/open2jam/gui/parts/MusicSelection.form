@@ -505,7 +505,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jc_timed_judgment" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jc_infinite_health" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jc_autosound" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jc_autoplay" min="-2" max="-2" attributes="0"/>
@@ -561,6 +563,7 @@
                           <Component id="btn_autoplay_keys" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jc_autoplay" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jc_autosound" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jc_infinite_health" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -719,6 +722,11 @@
             <Component class="javax.swing.JCheckBox" name="jc_autosound">
               <Properties>
                 <Property name="text" type="java.lang.String" value="AutoSound"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jc_infinite_health">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Infinite health"/>
               </Properties>
             </Component>
           </SubComponents>

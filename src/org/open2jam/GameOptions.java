@@ -53,6 +53,7 @@ public class GameOptions {
     private VisibilityMod visibilityModifier = VisibilityMod.None;
     private ChannelMod channelModifier = ChannelMod.None;
     private JudgmentType judgmentType = JudgmentType.BeatJudgment;
+    private boolean infiniteHealth = false;
     
     float keyVolume = 1.0f;
     float bgmVolume = 1.0f;
@@ -159,6 +160,22 @@ public class GameOptions {
     public void setChannelModifier(ChannelMod mod) {
         channelModifier = mod;
     }
+    
+    /**
+     * Gets infinite health option
+     * @return the infiniteHealth
+     */
+    public boolean isInfiniteHealth() {
+        return infiniteHealth;
+    }
+
+    /**
+     * Sets infinite health option
+     * @param infiniteHealth the infiniteHealth to set
+     */
+    public void setInfiniteHealth(boolean infiniteHealth) {
+        this.infiniteHealth = infiniteHealth;
+    }    
 
     /**
      * Gets key volume in range [0, 1].

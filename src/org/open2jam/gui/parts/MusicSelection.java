@@ -246,6 +246,7 @@ public class MusicSelection extends javax.swing.JPanel
         jc_full_screen.setSelected(go.isDisplayFullscreen());
         jc_vsync.setSelected(go.isDisplayVsync());
         jc_timed_judgment.setSelected(go.getJudgmentType() == GameOptions.JudgmentType.TimeJudgment);
+        jc_infinite_health.setSelected(go.isInfiniteHealth());
         
     }
     
@@ -268,6 +269,7 @@ public class MusicSelection extends javax.swing.JPanel
         go.setDisplayFullscreen(jc_full_screen.isSelected());
         go.setDisplayVsync(jc_vsync.isSelected());
         go.setJudgmentType(jc_timed_judgment.isSelected() ? GameOptions.JudgmentType.TimeJudgment : GameOptions.JudgmentType.BeatJudgment);
+        go.setInfiniteHealth(jc_infinite_health.isSelected());
         
         go.setDisplay((DisplayMode)combo_displays.getSelectedItem());
         
@@ -332,6 +334,7 @@ public class MusicSelection extends javax.swing.JPanel
         combo_speedType = new javax.swing.JComboBox();
         btn_autoplay_keys = new javax.swing.JButton();
         jc_autosound = new javax.swing.JCheckBox();
+        jc_infinite_health = new javax.swing.JCheckBox();
         panel_info = new javax.swing.JPanel();
         lbl_level1 = new javax.swing.JLabel();
         lbl_bpm1 = new javax.swing.JLabel();
@@ -664,6 +667,8 @@ public class MusicSelection extends javax.swing.JPanel
 
         jc_autosound.setText("AutoSound");
 
+        jc_infinite_health.setText("Infinite health");
+
         javax.swing.GroupLayout panel_modifiersLayout = new javax.swing.GroupLayout(panel_modifiers);
         panel_modifiers.setLayout(panel_modifiersLayout);
         panel_modifiersLayout.setHorizontalGroup(
@@ -706,6 +711,8 @@ public class MusicSelection extends javax.swing.JPanel
                                 .addComponent(js_hispeed, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel_modifiersLayout.createSequentialGroup()
                         .addComponent(jc_timed_judgment)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jc_infinite_health)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jc_autosound)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -749,7 +756,8 @@ public class MusicSelection extends javax.swing.JPanel
                     .addComponent(jc_timed_judgment)
                     .addComponent(btn_autoplay_keys)
                     .addComponent(jc_autoplay)
-                    .addComponent(jc_autosound)))
+                    .addComponent(jc_autosound)
+                    .addComponent(jc_infinite_health)))
         );
 
         panel_info.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Song Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.TOP));
@@ -1064,6 +1072,7 @@ public class MusicSelection extends javax.swing.JPanel
             final boolean autosound = jc_autosound.isSelected();
 
             final boolean time_judgment = jc_timed_judgment.isSelected();
+            final boolean infinite_health = jc_infinite_health.isSelected();
 
             final SpeedType speed_type =(SpeedType) combo_speedType.getSelectedItem();
 
@@ -1097,6 +1106,7 @@ public class MusicSelection extends javax.swing.JPanel
             go.setDisplayFullscreen(fs);
             go.setDisplayVsync(vsync);
             go.setJudgmentType(jc_timed_judgment.isSelected() ? GameOptions.JudgmentType.TimeJudgment : GameOptions.JudgmentType.BeatJudgment);
+            go.setInfiniteHealth(infinite_health);
             
             System.out.println(go.isAutoplay());
             
@@ -1292,6 +1302,7 @@ public class MusicSelection extends javax.swing.JPanel
     private javax.swing.JCheckBox jc_autosound;
     private javax.swing.JCheckBox jc_custom_size;
     private javax.swing.JCheckBox jc_full_screen;
+    private javax.swing.JCheckBox jc_infinite_health;
     private javax.swing.JCheckBox jc_timed_judgment;
     private javax.swing.JCheckBox jc_vsync;
     private javax.swing.JRadioButton jr_rank_easy;
